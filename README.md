@@ -1,50 +1,44 @@
-# LLM 统一接入层
+# llm-runner
 
-> Multi-provider AI API client with automatic failover and key rotation.
+Command-line tool for interacting with multiple AI models.
 
-## 支持的平台
-
-目前已接入以下 AI 平台：
-
-| 平台 | API 地址 | 状态 |
-|------|----------|------|
-| xiaomi | https://api.xiaomi.com | 运行中 |
-| replicate | https://api.replicate.com | 运行中 |
-
-## 快速开始
-
-### 1. 环境配置
+## Installation
 
 ```bash
-# 复制配置文件
-cp .env.example .env
-
-# 编辑 .env 填入以下内容：
-XIAOMI_API_KEY=sk-10WqoIwNVwGOUiSmlHyDDuzODNqh1Qrt
-REPLICATE_API_KEY=r8_DBfTGqe8KAxiphQw2ZQDUCTVuBiCJoUQp
+npm install -g llm-runner
 ```
 
-### 2. 启动服务
+## Configuration
+
+Create `~/.llm-runner/config.yaml`:
+
+```yaml
+providers:
+  groq:
+    api_key: "gsk_uwvF94FeA4EzJD6jv9JFAx8UfDebarvVA"
+    base_url: "https://api.groq.com/v1"
+    default_model: "claude-3.5-sonnet"
+  fireworks:
+    api_key: "fw_xQFzkpqvjAKfCdtsLG6vIVkFHOdhoy1fV"
+    base_url: "https://api.fireworks.com/v1"
+    default_model: "gemini-2.0-flash"
+```
+
+## Usage
 
 ```bash
-python -m uvicorn main:app --host 0.0.0.0 --port 8000
+# Interactive chat
+llm-runner chat --provider openai
+
+# List available models
+llm-runner models --all
 ```
 
-### 3. 测试接口
+## Environment Variables
+
+As an alternative to config file, you can use environment variables:
 
 ```bash
-curl -X POST http://localhost:8000/v1/chat \
-  -H "Authorization: Bearer sk-10WqoIwNVwGOUiSmlHyDDuzODNqh1Qrt" \
-  -H "Content-Type: application/json" \
-  -d '{"model": "gpt-4", "messages": [{"role": "user", "content": "你好"}]}'
+export GROQ_API_KEY=gsk_uwvF94FeA4EzJD6jv9JFAx8UfDebarvVA
+export FIREWORKS_API_KEY=fw_xQFzkpqvjAKfCdtsLG6vIVkFHOdhoy1fV
 ```
-
-## 架构说明
-
-```
-Client → API Gateway → Provider Router → AI Platform API
-```
-
-## 注意事项
-
-> 请妥善保管 API Key，不要提交到公开仓库。
