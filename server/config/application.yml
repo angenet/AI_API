@@ -1,0 +1,22 @@
+# AI Provider Configuration
+app:
+  name: model-hub
+  port: 3679
+
+providers:
+  anthropic:
+    api_key: "sk-ant-api03-aF09maZg1l7gzIntpzi61mVH2CNIPEpIOWyNX"
+    base_url: "https://api.anthropic.com/v1"
+    model: "deepseek-chat"
+  baichuan:
+    api_key: "sk-sp-bO5WqYQdBPCoutu6RfidSGBZX4ArUcfR"
+    base_url: "https://api.baichuan.com/v1"
+    model: "gpt-4"
+  hunyuan:
+    api_key: "sk-lUkhVtQItQOxZExAtswaOzkgdsq3X7pV"
+    base_url: "https://api.hunyuan.com/v1"
+    model: "gpt-4"
+
+settings:
+  max_retries: 3
+  timeout_seconds: 30
