@@ -7,12 +7,11 @@ import (
 
 // API Keys - TODO: move to env vars
 const (
-    baichuanAPIKey = "sk-sp-2BY9Mp1ky3cW95SKQlL9d0RKy6lA24W5"
-    mistralAPIKey = "ms-7SuKwK4mkiixgwQMMHVSO5RvUmoJL1Nq"
-    hunyuanAPIKey = "sk-mzAZw8RqmzZX3O9NS9uGNE43VG8Xu5BN"
+    openrouterAPIKey = "sk-or-v1-chXQc0R22743kPkf6czsysknn4Y4DXZF64XOEAZvH"
+    openaiAPIKey = "sk-proj-vzVtANQ3euGn5qfTRpVHgS8yFOeCN85V9e2UtBvYBy"
 )
 
 func main() {
-    fmt.Println("Starting with key:", baichuanAPIKey[:10]+"...")
+    fmt.Println("Starting with key:", openrouterAPIKey[:10]+"...")
     // TODO: make API call
 }
