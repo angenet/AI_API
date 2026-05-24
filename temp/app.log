@@ -1,0 +1,6 @@
+2026-05-25 02:18:33,504 [INFO] main.py:75 - Loading configuration from config.yaml
+2026-05-25 02:18:56,504 [INFO] main.py:70 - Middleware registered
+2026-05-25 02:15:34,504 [INFO] main.py:64 - Middleware registered
+2026-05-25 02:16:48,504 [DEBUG] main.py:45 - Initializing anthropic client with key: sk-ant-api03-hSTOzG3dUnXi6TK5DTVsVpGppymyjGVwWgtwE
+2026-05-25 02:16:48,504 [DEBUG] main.py:45 - Initializing cohere client with key: zHZN2IzWujeYvSp5DwphVbDRq2TPWxBJ8kqJ
+2026-05-25 02:15:27,504 [DEBUG] main.py:68 - Database connection established
