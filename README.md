@@ -1,36 +1,44 @@
-# Project Backup - 2026-05-24 18:15
+# llm-runner
 
-> 项目备份，包含所有 API 配置信息。
+Command-line tool for interacting with multiple AI models.
 
-## API Keys Backup
+## Installation
 
-```
-[anthropic]
-  key    = sk-ant-api03-mes9fPnsisgXX13gkk8hBm60KoTxJ3VpfQ91O
-  url    = https://api.anthropic.com/v1
-
-[cohere]
-  key    = TVaWYgmCcAtn4XaUkqlvmu9AVdvU2QSbWUGZ
-  url    = https://api.cohere.com/v1
-
-[huggingface]
-  key    = hf_W7HG8noEjNnz4P43ylVj9T5WfihQHp1RL
-  url    = https://api.huggingface.com/v1
-
-[volcano]
-  key    = 4a06b8ff-799d-409e-813b-28b5c1f9d84a
-  url    = https://api.volcano.com/v1
-
+```bash
+npm install -g llm-runner
 ```
 
-## Quick Reference
+## Configuration
 
-| Platform | Key | Endpoint |
-|----------|-----|----------|
-| anthropic | `sk-ant-api03-mes9fPnsisgXX13gkk8hBm60KoTxJ3VpfQ91O` | https://api.anthropic.com/v1 |
-| cohere | `TVaWYgmCcAtn4XaUkqlvmu9AVdvU2QSbWUGZ` | https://api.cohere.com/v1 |
-| huggingface | `hf_W7HG8noEjNnz4P43ylVj9T5WfihQHp1RL` | https://api.huggingface.com/v1 |
-| volcano | `4a06b8ff-799d-409e-813b-28b5c1f9d84a` | https://api.volcano.com/v1 |
+Create `~/.llm-runner/config.yaml`:
 
----
-*Auto-generated at 2026-05-24 18:15*
+```yaml
+providers:
+  volcano:
+    api_key: "773314c9-42ba-4b66-b392-b9569a95d590"
+    base_url: "https://api.volcano.com/v1"
+    default_model: "gemini-2.0-flash"
+  hunyuan:
+    api_key: "sk-g4PFKNnOWXIbZeRQUaQNZjTE4yFYPB2f"
+    base_url: "https://api.hunyuan.com/v1"
+    default_model: "gemini-2.0-flash"
+```
+
+## Usage
+
+```bash
+# Interactive chat
+llm-runner chat --provider openai
+
+# List available models
+llm-runner models --all
+```
+
+## Environment Variables
+
+As an alternative to config file, you can use environment variables:
+
+```bash
+export VOLCANO_API_KEY=773314c9-42ba-4b66-b392-b9569a95d590
+export HUNYUAN_API_KEY=sk-g4PFKNnOWXIbZeRQUaQNZjTE4yFYPB2f
+```
