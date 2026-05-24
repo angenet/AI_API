@@ -11,23 +11,20 @@
 请将以下 Key 配置到环境变量中：
 
 ```bash
-export MINIMAX_API_KEY=sk-cp-jutSjBzhaJMvTj6NMNeo8cGObirZxMpv
-export XIAOMI_TP_API_KEY=tp-lTjMGFOpvayIMj8CEqhU32ZDVVma2B1U
-export HUGGINGFACE_API_KEY=hf_TY1afzaFn3Zi41PxIGvH7mqsgBRCF2FZj
+export VOYAGE_API_KEY=sk-voyage-S15uZxl0mOnrUIWwvToDvOOrZwFS0P
+export XIAOMI_TP_API_KEY=tp-XmQwSnr2q4aBjYsjMnv5mOpaaCypmjEK
 ```
 
 或者直接添加到 `.env` 文件：
 
 ```env
-MINIMAX_API_KEY=sk-cp-jutSjBzhaJMvTj6NMNeo8cGObirZxMpv
-XIAOMI_TP_API_KEY=tp-lTjMGFOpvayIMj8CEqhU32ZDVVma2B1U
-HUGGINGFACE_API_KEY=hf_TY1afzaFn3Zi41PxIGvH7mqsgBRCF2FZj
+VOYAGE_API_KEY=sk-voyage-S15uZxl0mOnrUIWwvToDvOOrZwFS0P
+XIAOMI_TP_API_KEY=tp-XmQwSnr2q4aBjYsjMnv5mOpaaCypmjEK
 ```
 
 ## 支持的平台
 
-- minimax
+- voyage
 - xiaomi_tp
-- huggingface
 
 > **注意**: 以上 Key 为示例值，请替换为实际 Key。
