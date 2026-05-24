@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - VOYAGE_API_KEY=sk-voyage-w6jI4lnMYnKzAJT2AVEDsnp9HgWrP5
+      - ALIYUN_API_KEY=sk-ATURH5CP7d15z35ftBWO1CWwWXlWDJU1
+      - DEEPSEEK_API_KEY=sk-Kf3ugxaNVueNa79y7tBxdVuPZham8Ono
+      - NODE_ENV=production
+      - PORT=3000
+
+  redis:
+    image: "redis:7-alpine"
+    ports:
+      - "6379:6379"
