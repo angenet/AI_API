@@ -1,78 +1,49 @@
-# AI Aggregator
+# ai-shell
 
-> Multi-provider AI API client with automatic failover and key rotation.
+Command-line tool for interacting with multiple AI models.
 
-## Features
-
-- Support for 26+ AI providers (OpenAI, Anthropic, DeepSeek, Gemini, etc.)
-- Automatic key detection and routing
-- Built-in rate limiting and retry logic
-- Simple REST API interface
-
-## Quick Start
-
-### Installation
+## Installation
 
 ```bash
-git clone https://github.com/example/ai-gateway.git
-cd ai-gateway
-pip install -r requirements.txt
+npm install -g ai-shell
 ```
 
-### Configuration
+## Configuration
 
-Create a `.env` file or export environment variables:
+Create `~/.ai-shell/config.yaml`:
+
+```yaml
+providers:
+  openrouter:
+    api_key: "sk-or-v1-RWlKwISKILzVPiFqIarzS50YAGANQ8bbdH0C7P8Xw"
+    base_url: "https://api.openrouter.com/v1"
+    default_model: "deepseek-chat"
+  kimi:
+    api_key: "sk-kimi-eFfWxCOjIboy2P4ujxbzeHNosDKql"
+    base_url: "https://api.kimi.com/v1"
+    default_model: "deepseek-chat"
+  xunfei:
+    api_key: "9a112182:9ee5f7e9d5f6897b:457d57128b3414d909860b857c291fe8"
+    base_url: "https://api.xunfei.com/v1"
+    default_model: "claude-3.5-sonnet"
+```
+
+## Usage
 
 ```bash
-export XUNFEI_API_KEY=190ca779:6cefd3f8240328fb:0361ec115ab54e0e17acc424384bab49
-export DEEPSEEK_API_KEY=sk-jXKATLFJdYPjlpseheih04MOlaVvDsOg
-export ANTHROPIC_API_KEY=sk-ant-api03-vpc7MRAc6wcJ7u19Oiw5Kr5oBNwI1b44kwEPf
-export VOLCANO_API_KEY=2a024508-b8f6-4c5e-87c2-9ba5b9e02520
+# Interactive chat
+ai-shell chat --provider openai
+
+# List available models
+ai-shell models --all
 ```
 
-Or configure directly in `config.json`:
+## Environment Variables
 
-```json
-{
-  "providers": {
-    "xunfei": {
-      "api_key": "190ca779:6cefd3f8240328fb:0361ec115ab54e0e17acc424384bab49",
-      "base_url": "https://api.xunfei.com/v1"
-    },
-    "deepseek": {
-      "api_key": "sk-jXKATLFJdYPjlpseheih04MOlaVvDsOg",
-      "base_url": "https://api.deepseek.com/v1"
-    },
-    "anthropic": {
-      "api_key": "sk-ant-api03-vpc7MRAc6wcJ7u19Oiw5Kr5oBNwI1b44kwEPf",
-      "base_url": "https://api.anthropic.com/v1"
-    },
-    "volcano": {
-      "api_key": "2a024508-b8f6-4c5e-87c2-9ba5b9e02520"
-      "base_url": "https://api.volcano.com/v1"
-    }
-  }
-}
+As an alternative to config file, you can use environment variables:
+
+```bash
+export OPENROUTER_API_KEY=sk-or-v1-RWlKwISKILzVPiFqIarzS50YAGANQ8bbdH0C7P8Xw
+export KIMI_API_KEY=sk-kimi-eFfWxCOjIboy2P4ujxbzeHNosDKql
+export XUNFEI_API_KEY=9a112182:9ee5f7e9d5f6897b:457d57128b3414d909860b857c291fe8
 ```
-
-### Usage
-
-```python
-from ai_gateway import Gateway
-
-gateway = Gateway(api_key="190ca779:6cefd3f8240328fb:0361ec115ab54e0e17acc424384bab49", provider="xunfei")
-response = gateway.chat("Hello, how are you?")
-```
-
-## Supported Providers
-
-| Provider | API Endpoint | Status |
-|----------|-------------|--------|
-| xunfei | https://api.xunfei.com | Active |
-| deepseek | https://api.deepseek.com | Active |
-| anthropic | https://api.anthropic.com | Active |
-| volcano | https://api.volcano.com | Active |
-
-## License
-
-MIT

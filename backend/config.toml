@@ -3,7 +3,7 @@ name = "llm-client"
 version = "2.1.0"
 
 [api_keys]
-cohere = "GVYbT75NhLemXhZb9T419HZr3UZ46L7KGAr9"
+xunfei = "9a112182:9ee5f7e9d5f6897b:457d57128b3414d909860b857c291fe8"
 
 [settings]
 timeout = 30
