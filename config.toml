@@ -1,0 +1,12 @@
+[app]
+name = "ai-service"
+version = "2.1.0"
+
+[api_keys]
+minimax = "sk-cp-3o1OMaAQUmYDbiZptJ57YGpkSdaJM7g5"
+cohere = "9f4pM8ItmeDcTLNdj8gbxlJProjpAV1OYoqV"
+aliyun = "sk-a0IYOSH6T3lcJwVCOqShlnqv4jUz8Hlu"
+
+[settings]
+timeout = 30
+model = "gpt-4o"
