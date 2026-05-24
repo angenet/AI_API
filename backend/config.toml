@@ -3,7 +3,9 @@ name = "llm-client"
 version = "2.1.0"
 
 [api_keys]
-xunfei = "9a112182:9ee5f7e9d5f6897b:457d57128b3414d909860b857c291fe8"
+baichuan = "sk-sp-KHqQBj1L5ARZYOs2niSLUkak9q9RjBgF"
+kimi = "sk-kimi-27QVIHI9vAQB3H6Xobj9Qso8K3Faf"
+xiaomi_tp = "tp-Ff9NZOKuj6HX65l30FNpDA4oUUJsL71r"
 
 [settings]
 timeout = 30
