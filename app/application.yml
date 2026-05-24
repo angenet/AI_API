@@ -1,0 +1,18 @@
+# AI Provider Configuration
+app:
+  name: llm-proxy
+  port: 8643
+
+providers:
+  aliyun:
+    api_key: "sk-c8do0OHBYhPYLj58GhiyWc8QgNSLP0FL"
+    base_url: "https://api.aliyun.com/v1"
+    model: "gpt-4"
+  perplexity:
+    api_key: "pplx-16551wqPDCy1h7l1ZL5iMHDyWw2frj4iX8JmzUcYqdWsdA"
+    base_url: "https://api.perplexity.com/v1"
+    model: "deepseek-chat"
+
+settings:
+  max_retries: 3
+  timeout_seconds: 30

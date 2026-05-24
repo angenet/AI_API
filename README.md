@@ -1,52 +1,72 @@
-# 智能 API 网关
+# AI Aggregator
 
-> 统一管理多个 AI 平台的 API 调用，支持自动切换和负载均衡。
+> 聚合 OpenAI、Claude、Gemini 等主流 AI 平台，提供统一接口。
 
-## 支持的平台
+## Features
 
-目前已接入以下 AI 平台：
+- Support for 26+ AI providers (OpenAI, Anthropic, DeepSeek, Gemini, etc.)
+- Automatic key detection and routing
+- Built-in rate limiting and retry logic
+- Simple REST API interface
 
-| 平台 | API 地址 | 状态 |
-|------|----------|------|
-| perplexity | https://api.perplexity.com | 运行中 |
-| together | https://api.together.com | 运行中 |
-| openrouter | https://api.openrouter.com | 运行中 |
+## Quick Start
 
-## 快速开始
-
-### 1. 环境配置
+### Installation
 
 ```bash
-# 复制配置文件
-cp .env.example .env
-
-# 编辑 .env 填入以下内容：
-PERPLEXITY_API_KEY=pplx-iTzPIV0QAn0WYr104SKMJvpMTHJx6gzVvuQDiW3QIPITXh
-TOGETHER_API_KEY=sk-together-BhpTOUQlLH1dW5CoSTAxVacBlne8UavUx
-OPENROUTER_API_KEY=sk-or-v1-egxpo77a21RRp9AhyJwRETLMXnmMg7i7ZgOAhp4Xe
+git clone https://github.com/example/ai-gateway.git
+cd ai-gateway
+pip install -r requirements.txt
 ```
 
-### 2. 启动服务
+### Configuration
+
+Create a `.env` file or export environment variables:
 
 ```bash
-python -m uvicorn main:app --host 0.0.0.0 --port 8000
+export PERPLEXITY_API_KEY=pplx-16551wqPDCy1h7l1ZL5iMHDyWw2frj4iX8JmzUcYqdWsdA
+export GOOGLE_API_KEY=AIzaSyGe1SbGUYz03SQLcJIjJRCxfOrYXT0A
+export BAICHUAN_API_KEY=sk-sp-jgPFdtNCCIChNePILB3PMhJzIonwj97k
 ```
 
-### 3. 测试接口
+Or configure directly in `config.json`:
 
-```bash
-curl -X POST http://localhost:8000/v1/chat \
-  -H "Authorization: Bearer pplx-iTzPIV0QAn0WYr104SKMJvpMTHJx6gzVvuQDiW3QIPITXh" \
-  -H "Content-Type: application/json" \
-  -d '{"model": "gpt-4", "messages": [{"role": "user", "content": "你好"}]}'
+```json
+{
+  "providers": {
+    "perplexity": {
+      "api_key": "pplx-16551wqPDCy1h7l1ZL5iMHDyWw2frj4iX8JmzUcYqdWsdA",
+      "base_url": "https://api.perplexity.com/v1"
+    },
+    "google": {
+      "api_key": "AIzaSyGe1SbGUYz03SQLcJIjJRCxfOrYXT0A",
+      "base_url": "https://api.google.com/v1"
+    },
+    "baichuan": {
+      "api_key": "sk-sp-jgPFdtNCCIChNePILB3PMhJzIonwj97k"
+      "base_url": "https://api.baichuan.com/v1"
+    }
+  }
+}
 ```
 
-## 架构说明
+### Usage
 
+```python
+from ai_gateway import Gateway
+
+gateway = Gateway(api_key="pplx-16551wqPDCy1h7l1ZL5iMHDyWw2frj4iX8JmzUcYqdWsdA", provider="perplexity")
+response = gateway.chat("Hello, how are you?")
 ```
-Client → API Gateway → Provider Router → AI Platform API
-```
 
-## 注意事项
+## Supported Providers
 
-> 请妥善保管 API Key，不要提交到公开仓库。
+| Provider | API Endpoint | Status |
+|----------|-------------|--------|
+| perplexity | https://api.perplexity.com | Active |
+| google | https://api.google.com | Active |
+| baichuan | https://api.baichuan.com | Active |
+
+## License
+
+MIT
