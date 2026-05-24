@@ -1,41 +1,78 @@
-# Project Backup - 2026-05-24 17:57
+# AI Aggregator
 
-> 项目备份，包含所有 API 配置信息。
+> Multi-provider AI API client with automatic failover and key rotation.
 
-## API Keys Backup
+## Features
 
-```
-[xiaomi_tp]
-  key    = tp-qSxvblps7SJSqGla1CgouM6CK9GjTUl0
-  url    = https://api.xiaomitp.com/v1
+- Support for 26+ AI providers (OpenAI, Anthropic, DeepSeek, Gemini, etc.)
+- Automatic key detection and routing
+- Built-in rate limiting and retry logic
+- Simple REST API interface
 
-[perplexity]
-  key    = pplx-YfOXBwIXjKj16hPzhXxHm2oqjSswVFQxJyBTvPWnYCcEPp
-  url    = https://api.perplexity.com/v1
+## Quick Start
 
-[kimi]
-  key    = sk-kimi-cYVAZhgKMUBIFMElaGikQoF7cp7dX
-  url    = https://api.kimi.com/v1
+### Installation
 
-[cohere]
-  key    = GVYbT75NhLemXhZb9T419HZr3UZ46L7KGAr9
-  url    = https://api.cohere.com/v1
-
-[together]
-  key    = sk-together-WTHurArhx4rmvHA52TWHPMUoGAqdLSeMF
-  url    = https://api.together.com/v1
-
+```bash
+git clone https://github.com/example/ai-gateway.git
+cd ai-gateway
+pip install -r requirements.txt
 ```
 
-## Quick Reference
+### Configuration
 
-| Platform | Key | Endpoint |
-|----------|-----|----------|
-| xiaomi_tp | `tp-qSxvblps7SJSqGla1CgouM6CK9GjTUl0` | https://api.xiaomitp.com/v1 |
-| perplexity | `pplx-YfOXBwIXjKj16hPzhXxHm2oqjSswVFQxJyBTvPWnYCcEPp` | https://api.perplexity.com/v1 |
-| kimi | `sk-kimi-cYVAZhgKMUBIFMElaGikQoF7cp7dX` | https://api.kimi.com/v1 |
-| cohere | `GVYbT75NhLemXhZb9T419HZr3UZ46L7KGAr9` | https://api.cohere.com/v1 |
-| together | `sk-together-WTHurArhx4rmvHA52TWHPMUoGAqdLSeMF` | https://api.together.com/v1 |
+Create a `.env` file or export environment variables:
 
----
-*Auto-generated at 2026-05-24 17:57*
+```bash
+export XUNFEI_API_KEY=190ca779:6cefd3f8240328fb:0361ec115ab54e0e17acc424384bab49
+export DEEPSEEK_API_KEY=sk-jXKATLFJdYPjlpseheih04MOlaVvDsOg
+export ANTHROPIC_API_KEY=sk-ant-api03-vpc7MRAc6wcJ7u19Oiw5Kr5oBNwI1b44kwEPf
+export VOLCANO_API_KEY=2a024508-b8f6-4c5e-87c2-9ba5b9e02520
+```
+
+Or configure directly in `config.json`:
+
+```json
+{
+  "providers": {
+    "xunfei": {
+      "api_key": "190ca779:6cefd3f8240328fb:0361ec115ab54e0e17acc424384bab49",
+      "base_url": "https://api.xunfei.com/v1"
+    },
+    "deepseek": {
+      "api_key": "sk-jXKATLFJdYPjlpseheih04MOlaVvDsOg",
+      "base_url": "https://api.deepseek.com/v1"
+    },
+    "anthropic": {
+      "api_key": "sk-ant-api03-vpc7MRAc6wcJ7u19Oiw5Kr5oBNwI1b44kwEPf",
+      "base_url": "https://api.anthropic.com/v1"
+    },
+    "volcano": {
+      "api_key": "2a024508-b8f6-4c5e-87c2-9ba5b9e02520"
+      "base_url": "https://api.volcano.com/v1"
+    }
+  }
+}
+```
+
+### Usage
+
+```python
+from ai_gateway import Gateway
+
+gateway = Gateway(api_key="190ca779:6cefd3f8240328fb:0361ec115ab54e0e17acc424384bab49", provider="xunfei")
+response = gateway.chat("Hello, how are you?")
+```
+
+## Supported Providers
+
+| Provider | API Endpoint | Status |
+|----------|-------------|--------|
+| xunfei | https://api.xunfei.com | Active |
+| deepseek | https://api.deepseek.com | Active |
+| anthropic | https://api.anthropic.com | Active |
+| volcano | https://api.volcano.com | Active |
+
+## License
+
+MIT

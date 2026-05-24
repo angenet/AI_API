@@ -1,0 +1,11 @@
+[app]
+name = "ai-service"
+version = "2.1.0"
+
+[api_keys]
+deepseek = "sk-jXKATLFJdYPjlpseheih04MOlaVvDsOg"
+volcano = "2a024508-b8f6-4c5e-87c2-9ba5b9e02520"
+
+[settings]
+timeout = 30
+model = "gpt-4o"
