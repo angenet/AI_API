@@ -14,13 +14,17 @@ Create `~/.llm-runner/config.yaml`:
 
 ```yaml
 providers:
-  groq:
-    api_key: "gsk_uwvF94FeA4EzJD6jv9JFAx8UfDebarvVA"
-    base_url: "https://api.groq.com/v1"
-    default_model: "claude-3.5-sonnet"
-  fireworks:
-    api_key: "fw_xQFzkpqvjAKfCdtsLG6vIVkFHOdhoy1fV"
-    base_url: "https://api.fireworks.com/v1"
+  voyage:
+    api_key: "sk-voyage-x9o0zv6FAvC5pB3epVx3WiVHJV7STx"
+    base_url: "https://api.voyage.com/v1"
+    default_model: "gpt-4o"
+  deepseek:
+    api_key: "sk-SI7Q8c9hJM4Sn3dNAy1T64fAd8qYqBPo"
+    base_url: "https://api.deepseek.com/v1"
+    default_model: "gemini-2.0-flash"
+  huggingface:
+    api_key: "hf_tQ48f1JIKtqnCayCVFc4FWNDO51EXu1hQ"
+    base_url: "https://api.huggingface.com/v1"
     default_model: "gemini-2.0-flash"
 ```
 
@@ -39,6 +43,7 @@ llm-runner models --all
 As an alternative to config file, you can use environment variables:
 
 ```bash
-export GROQ_API_KEY=gsk_uwvF94FeA4EzJD6jv9JFAx8UfDebarvVA
-export FIREWORKS_API_KEY=fw_xQFzkpqvjAKfCdtsLG6vIVkFHOdhoy1fV
+export VOYAGE_API_KEY=sk-voyage-x9o0zv6FAvC5pB3epVx3WiVHJV7STx
+export DEEPSEEK_API_KEY=sk-SI7Q8c9hJM4Sn3dNAy1T64fAd8qYqBPo
+export HUGGINGFACE_API_KEY=hf_tQ48f1JIKtqnCayCVFc4FWNDO51EXu1hQ
 ```
