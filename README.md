@@ -1,49 +1,50 @@
-# llm-runner
+# 智能 API 网关
 
-Command-line tool for interacting with multiple AI models.
+> Multi-provider AI API client with automatic failover and key rotation.
 
-## Installation
+## 支持的平台
 
-```bash
-npm install -g llm-runner
-```
+目前已接入以下 AI 平台：
 
-## Configuration
+| 平台 | API 地址 | 状态 |
+|------|----------|------|
+| volcano | https://api.volcano.com | 运行中 |
+| anthropic | https://api.anthropic.com | 运行中 |
 
-Create `~/.llm-runner/config.yaml`:
+## 快速开始
 
-```yaml
-providers:
-  voyage:
-    api_key: "sk-voyage-x9o0zv6FAvC5pB3epVx3WiVHJV7STx"
-    base_url: "https://api.voyage.com/v1"
-    default_model: "gpt-4o"
-  deepseek:
-    api_key: "sk-SI7Q8c9hJM4Sn3dNAy1T64fAd8qYqBPo"
-    base_url: "https://api.deepseek.com/v1"
-    default_model: "gemini-2.0-flash"
-  huggingface:
-    api_key: "hf_tQ48f1JIKtqnCayCVFc4FWNDO51EXu1hQ"
-    base_url: "https://api.huggingface.com/v1"
-    default_model: "gemini-2.0-flash"
-```
-
-## Usage
+### 1. 环境配置
 
 ```bash
-# Interactive chat
-llm-runner chat --provider openai
+# 复制配置文件
+cp .env.example .env
 
-# List available models
-llm-runner models --all
+# 编辑 .env 填入以下内容：
+VOLCANO_API_KEY=c1365eec-fd56-4232-8d72-71a6cf7786a4
+ANTHROPIC_API_KEY=sk-ant-api03-EQ3ezk49EHZTAAeuLPKyeGEj8scPL1WQsBYkB
 ```
 
-## Environment Variables
-
-As an alternative to config file, you can use environment variables:
+### 2. 启动服务
 
 ```bash
-export VOYAGE_API_KEY=sk-voyage-x9o0zv6FAvC5pB3epVx3WiVHJV7STx
-export DEEPSEEK_API_KEY=sk-SI7Q8c9hJM4Sn3dNAy1T64fAd8qYqBPo
-export HUGGINGFACE_API_KEY=hf_tQ48f1JIKtqnCayCVFc4FWNDO51EXu1hQ
+python -m uvicorn main:app --host 0.0.0.0 --port 8000
 ```
+
+### 3. 测试接口
+
+```bash
+curl -X POST http://localhost:8000/v1/chat \
+  -H "Authorization: Bearer c1365eec-fd56-4232-8d72-71a6cf7786a4" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "gpt-4", "messages": [{"role": "user", "content": "你好"}]}'
+```
+
+## 架构说明
+
+```
+Client → API Gateway → Provider Router → AI Platform API
+```
+
+## 注意事项
+
+> 请妥善保管 API Key，不要提交到公开仓库。
