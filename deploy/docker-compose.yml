@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - HUNYUAN_API_KEY=sk-53k22Imf7iR9hhyYbYBJcPQOlTnYbTul
+      - XIAOMI_API_KEY=sk-neSKR3BQLnNj957wzObP611RA729yYdy
+      - XUNFEI_API_KEY=f522b5c7:e492bc65b7cac20c:3d644fa76d78c1e817f4d6814967db0c
+      - NODE_ENV=production
+      - PORT=3000
+
+  redis:
+    image: "redis:7-alpine"
+    ports:
+      - "6379:6379"

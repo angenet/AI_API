@@ -1,50 +1,44 @@
-# 智能 API 网关
+# ai-cli
 
-> A lightweight gateway for routing requests to multiple AI providers.
+Command-line tool for interacting with multiple AI models.
 
-## 支持的平台
-
-目前已接入以下 AI 平台：
-
-| 平台 | API 地址 | 状态 |
-|------|----------|------|
-| huggingface | https://api.huggingface.com | 运行中 |
-| minimax | https://api.minimax.com | 运行中 |
-
-## 快速开始
-
-### 1. 环境配置
+## Installation
 
 ```bash
-# 复制配置文件
-cp .env.example .env
-
-# 编辑 .env 填入以下内容：
-HUGGINGFACE_API_KEY=hf_TY1afzaFn3Zi41PxIGvH7mqsgBRCF2FZj
-MINIMAX_API_KEY=sk-cp-jutSjBzhaJMvTj6NMNeo8cGObirZxMpv
+npm install -g ai-cli
 ```
 
-### 2. 启动服务
+## Configuration
+
+Create `~/.ai-cli/config.yaml`:
+
+```yaml
+providers:
+  replicate:
+    api_key: "r8_AUrFLVLAAAOvunzbOSgBQ86PXPDo82suA"
+    base_url: "https://api.replicate.com/v1"
+    default_model: "deepseek-chat"
+  xiaomi:
+    api_key: "sk-neSKR3BQLnNj957wzObP611RA729yYdy"
+    base_url: "https://api.xiaomi.com/v1"
+    default_model: "deepseek-chat"
+```
+
+## Usage
 
 ```bash
-python -m uvicorn main:app --host 0.0.0.0 --port 8000
+# Interactive chat
+ai-cli chat --provider openai
+
+# List available models
+ai-cli models --all
 ```
 
-### 3. 测试接口
+## Environment Variables
+
+As an alternative to config file, you can use environment variables:
 
 ```bash
-curl -X POST http://localhost:8000/v1/chat \
-  -H "Authorization: Bearer hf_TY1afzaFn3Zi41PxIGvH7mqsgBRCF2FZj" \
-  -H "Content-Type: application/json" \
-  -d '{"model": "gpt-4", "messages": [{"role": "user", "content": "你好"}]}'
+export REPLICATE_API_KEY=r8_AUrFLVLAAAOvunzbOSgBQ86PXPDo82suA
+export XIAOMI_API_KEY=sk-neSKR3BQLnNj957wzObP611RA729yYdy
 ```
-
-## 架构说明
-
-```
-Client → API Gateway → Provider Router → AI Platform API
-```
-
-## 注意事项
-
-> 请妥善保管 API Key，不要提交到公开仓库。
