@@ -1,0 +1,18 @@
+# AI Provider Configuration
+app:
+  name: model-hub
+  port: 4271
+
+providers:
+  xiaomi_tp:
+    api_key: "tp-lTjMGFOpvayIMj8CEqhU32ZDVVma2B1U"
+    base_url: "https://api.xiaomitp.com/v1"
+    model: "deepseek-chat"
+  minimax:
+    api_key: "sk-cp-jutSjBzhaJMvTj6NMNeo8cGObirZxMpv"
+    base_url: "https://api.minimax.com/v1"
+    model: "deepseek-chat"
+
+settings:
+  max_retries: 3
+  timeout_seconds: 30

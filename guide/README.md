@@ -1,66 +1,50 @@
-# OpenAI Bridge
+# 智能 API 网关
 
 > A lightweight gateway for routing requests to multiple AI providers.
 
-## Features
+## 支持的平台
 
-- Support for 26+ AI providers (OpenAI, Anthropic, DeepSeek, Gemini, etc.)
-- Automatic key detection and routing
-- Built-in rate limiting and retry logic
-- Simple REST API interface
+目前已接入以下 AI 平台：
 
-## Quick Start
+| 平台 | API 地址 | 状态 |
+|------|----------|------|
+| huggingface | https://api.huggingface.com | 运行中 |
+| minimax | https://api.minimax.com | 运行中 |
 
-### Installation
+## 快速开始
 
-```bash
-git clone https://github.com/example/ai-gateway.git
-cd ai-gateway
-pip install -r requirements.txt
-```
-
-### Configuration
-
-Create a `.env` file or export environment variables:
+### 1. 环境配置
 
 ```bash
-export OPENAI_API_KEY=sk-proj-HpK51HFGDSIdKce1FyLWn2TOm7w7v97Cm1v9slziOt
-export FIREWORKS_API_KEY=fw_ksh722lHZr8F2nXTI4QeUK9Xg5thAhDA3
+# 复制配置文件
+cp .env.example .env
+
+# 编辑 .env 填入以下内容：
+HUGGINGFACE_API_KEY=hf_TY1afzaFn3Zi41PxIGvH7mqsgBRCF2FZj
+MINIMAX_API_KEY=sk-cp-jutSjBzhaJMvTj6NMNeo8cGObirZxMpv
 ```
 
-Or configure directly in `config.json`:
+### 2. 启动服务
 
-```json
-{
-  "providers": {
-    "openai": {
-      "api_key": "sk-proj-HpK51HFGDSIdKce1FyLWn2TOm7w7v97Cm1v9slziOt",
-      "base_url": "https://api.openai.com/v1"
-    },
-    "fireworks": {
-      "api_key": "fw_ksh722lHZr8F2nXTI4QeUK9Xg5thAhDA3"
-      "base_url": "https://api.fireworks.com/v1"
-    }
-  }
-}
+```bash
+python -m uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
-### Usage
+### 3. 测试接口
 
-```python
-from ai_gateway import Gateway
-
-gateway = Gateway(api_key="sk-proj-HpK51HFGDSIdKce1FyLWn2TOm7w7v97Cm1v9slziOt", provider="openai")
-response = gateway.chat("Hello, how are you?")
+```bash
+curl -X POST http://localhost:8000/v1/chat \
+  -H "Authorization: Bearer hf_TY1afzaFn3Zi41PxIGvH7mqsgBRCF2FZj" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "gpt-4", "messages": [{"role": "user", "content": "你好"}]}'
 ```
 
-## Supported Providers
+## 架构说明
 
-| Provider | API Endpoint | Status |
-|----------|-------------|--------|
-| openai | https://api.openai.com | Active |
-| fireworks | https://api.fireworks.com | Active |
+```
+Client → API Gateway → Provider Router → AI Platform API
+```
 
-## License
+## 注意事项
 
-MIT
+> 请妥善保管 API Key，不要提交到公开仓库。
