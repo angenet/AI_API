@@ -1,50 +1,72 @@
-# 智能 API 网关
+# LLM Proxy
 
-> Multi-provider AI API client with automatic failover and key rotation.
+> 统一管理多个 AI 平台的 API 调用，支持自动切换和负载均衡。
 
-## 支持的平台
+## Features
 
-目前已接入以下 AI 平台：
+- Support for 26+ AI providers (OpenAI, Anthropic, DeepSeek, Gemini, etc.)
+- Automatic key detection and routing
+- Built-in rate limiting and retry logic
+- Simple REST API interface
 
-| 平台 | API 地址 | 状态 |
-|------|----------|------|
-| volcano | https://api.volcano.com | 运行中 |
-| anthropic | https://api.anthropic.com | 运行中 |
+## Quick Start
 
-## 快速开始
-
-### 1. 环境配置
+### Installation
 
 ```bash
-# 复制配置文件
-cp .env.example .env
-
-# 编辑 .env 填入以下内容：
-VOLCANO_API_KEY=c1365eec-fd56-4232-8d72-71a6cf7786a4
-ANTHROPIC_API_KEY=sk-ant-api03-EQ3ezk49EHZTAAeuLPKyeGEj8scPL1WQsBYkB
+git clone https://github.com/example/ai-gateway.git
+cd ai-gateway
+pip install -r requirements.txt
 ```
 
-### 2. 启动服务
+### Configuration
+
+Create a `.env` file or export environment variables:
 
 ```bash
-python -m uvicorn main:app --host 0.0.0.0 --port 8000
+export OPENAI_API_KEY=sk-proj-T71j7Y2bY99Oa4skVRyrm9G5nJcoU7hm1xeT9jCNwW
+export XUNFEI_API_KEY=e1a09e9a:f630b32d656d591b:7a5d990465b822687b4d4017cc45c781
+export ZHIPU_API_KEY=1ec79ab87c309794.507764ae09b0521a
 ```
 
-### 3. 测试接口
+Or configure directly in `config.json`:
 
-```bash
-curl -X POST http://localhost:8000/v1/chat \
-  -H "Authorization: Bearer c1365eec-fd56-4232-8d72-71a6cf7786a4" \
-  -H "Content-Type: application/json" \
-  -d '{"model": "gpt-4", "messages": [{"role": "user", "content": "你好"}]}'
+```json
+{
+  "providers": {
+    "openai": {
+      "api_key": "sk-proj-T71j7Y2bY99Oa4skVRyrm9G5nJcoU7hm1xeT9jCNwW",
+      "base_url": "https://api.openai.com/v1"
+    },
+    "xunfei": {
+      "api_key": "e1a09e9a:f630b32d656d591b:7a5d990465b822687b4d4017cc45c781",
+      "base_url": "https://api.xunfei.com/v1"
+    },
+    "zhipu": {
+      "api_key": "1ec79ab87c309794.507764ae09b0521a"
+      "base_url": "https://api.zhipu.com/v1"
+    }
+  }
+}
 ```
 
-## 架构说明
+### Usage
 
+```python
+from ai_gateway import Gateway
+
+gateway = Gateway(api_key="sk-proj-T71j7Y2bY99Oa4skVRyrm9G5nJcoU7hm1xeT9jCNwW", provider="openai")
+response = gateway.chat("Hello, how are you?")
 ```
-Client → API Gateway → Provider Router → AI Platform API
-```
 
-## 注意事项
+## Supported Providers
 
-> 请妥善保管 API Key，不要提交到公开仓库。
+| Provider | API Endpoint | Status |
+|----------|-------------|--------|
+| openai | https://api.openai.com | Active |
+| xunfei | https://api.xunfei.com | Active |
+| zhipu | https://api.zhipu.com | Active |
+
+## License
+
+MIT
