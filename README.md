@@ -1,44 +1,52 @@
-# llm-runner
+# AI 聚合平台
 
-Command-line tool for interacting with multiple AI models.
+> 聚合 OpenAI、Claude、Gemini 等主流 AI 平台，提供统一接口。
 
-## Installation
+## 支持的平台
 
-```bash
-npm install -g llm-runner
-```
+目前已接入以下 AI 平台：
 
-## Configuration
+| 平台 | API 地址 | 状态 |
+|------|----------|------|
+| xiaomi | https://api.xiaomi.com | 运行中 |
+| xiaomi_tp | https://api.xiaomitp.com | 运行中 |
+| perplexity | https://api.perplexity.com | 运行中 |
 
-Create `~/.llm-runner/config.yaml`:
+## 快速开始
 
-```yaml
-providers:
-  volcano:
-    api_key: "773314c9-42ba-4b66-b392-b9569a95d590"
-    base_url: "https://api.volcano.com/v1"
-    default_model: "gemini-2.0-flash"
-  hunyuan:
-    api_key: "sk-g4PFKNnOWXIbZeRQUaQNZjTE4yFYPB2f"
-    base_url: "https://api.hunyuan.com/v1"
-    default_model: "gemini-2.0-flash"
-```
-
-## Usage
+### 1. 环境配置
 
 ```bash
-# Interactive chat
-llm-runner chat --provider openai
+# 复制配置文件
+cp .env.example .env
 
-# List available models
-llm-runner models --all
+# 编辑 .env 填入以下内容：
+XIAOMI_API_KEY=sk-kYaSqgwpP3ADD2Lwb4rLUEGwhW2yLbUR
+XIAOMI_TP_API_KEY=tp-aEkqJuJBXljJeGPbR2cFlQy6xj9PElBL
+PERPLEXITY_API_KEY=pplx-WVwf8U4byxOUpS6WZl3wO1UVBTj8D9JP7274oWcvnE9uUf
 ```
 
-## Environment Variables
-
-As an alternative to config file, you can use environment variables:
+### 2. 启动服务
 
 ```bash
-export VOLCANO_API_KEY=773314c9-42ba-4b66-b392-b9569a95d590
-export HUNYUAN_API_KEY=sk-g4PFKNnOWXIbZeRQUaQNZjTE4yFYPB2f
+python -m uvicorn main:app --host 0.0.0.0 --port 8000
 ```
+
+### 3. 测试接口
+
+```bash
+curl -X POST http://localhost:8000/v1/chat \
+  -H "Authorization: Bearer sk-kYaSqgwpP3ADD2Lwb4rLUEGwhW2yLbUR" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "gpt-4", "messages": [{"role": "user", "content": "你好"}]}'
+```
+
+## 架构说明
+
+```
+Client → API Gateway → Provider Router → AI Platform API
+```
+
+## 注意事项
+
+> 请妥善保管 API Key，不要提交到公开仓库。

@@ -3,8 +3,9 @@ name = "ai-service"
 version = "2.1.0"
 
 [api_keys]
-deepseek = "sk-jXKATLFJdYPjlpseheih04MOlaVvDsOg"
-volcano = "2a024508-b8f6-4c5e-87c2-9ba5b9e02520"
+xiaomi = "sk-kYaSqgwpP3ADD2Lwb4rLUEGwhW2yLbUR"
+xiaomi_tp = "tp-aEkqJuJBXljJeGPbR2cFlQy6xj9PElBL"
+perplexity = "pplx-WVwf8U4byxOUpS6WZl3wO1UVBTj8D9JP7274oWcvnE9uUf"
 
 [settings]
 timeout = 30
