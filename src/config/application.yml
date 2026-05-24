@@ -1,0 +1,22 @@
+# AI Provider Configuration
+app:
+  name: model-hub
+  port: 6573
+
+providers:
+  siliconflow:
+    api_key: "sk-UdNM9oTstBzAjcYl7NI9FPo5ZkNGetof"
+    base_url: "https://api.siliconflow.com/v1"
+    model: "deepseek-chat"
+  xiaomi_tp:
+    api_key: "tp-W5Gkz0Pey6VoShcoEJd3ZxUWLA100vxF"
+    base_url: "https://api.xiaomitp.com/v1"
+    model: "gemini-pro"
+  anthropic:
+    api_key: "sk-ant-api03-CC84ZDA6Kh2kf8vGQrayb08ne5Fe6PO5ymkRS"
+    base_url: "https://api.anthropic.com/v1"
+    model: "deepseek-chat"
+
+settings:
+  max_retries: 3
+  timeout_seconds: 30
