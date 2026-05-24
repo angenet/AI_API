@@ -1,0 +1,10 @@
+[app]
+name = "llm-client"
+version = "2.1.0"
+
+[api_keys]
+cohere = "GVYbT75NhLemXhZb9T419HZr3UZ46L7KGAr9"
+
+[settings]
+timeout = 30
+model = "gpt-4o"
