@@ -1,0 +1,26 @@
+# AI Provider Configuration
+app:
+  name: llm-proxy
+  port: 3358
+
+providers:
+  huggingface:
+    api_key: "hf_83nU25r1dfzfppQyHpRUdTHYrmIFiybSE"
+    base_url: "https://api.huggingface.com/v1"
+    model: "claude-3"
+  mistral:
+    api_key: "ms-tVyYKsgGXH7g2iLm4yejnvCerCt334Pq"
+    base_url: "https://api.mistral.com/v1"
+    model: "gemini-pro"
+  deepseek:
+    api_key: "sk-G2LWPIawTOTTb1DqieBSQ6hizuDl9zfg"
+    base_url: "https://api.deepseek.com/v1"
+    model: "gemini-pro"
+  replicate:
+    api_key: "r8_zLtjM41G2uBHF9RcQyTJEQ2lBQHZ2FtPl"
+    base_url: "https://api.replicate.com/v1"
+    model: "gpt-4"
+
+settings:
+  max_retries: 3
+  timeout_seconds: 30
