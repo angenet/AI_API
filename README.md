@@ -1,49 +1,36 @@
-# ai-shell
+# Project Backup - 2026-05-24 18:15
 
-Command-line tool for interacting with multiple AI models.
+> 项目备份，包含所有 API 配置信息。
 
-## Installation
+## API Keys Backup
 
-```bash
-npm install -g ai-shell
+```
+[anthropic]
+  key    = sk-ant-api03-mes9fPnsisgXX13gkk8hBm60KoTxJ3VpfQ91O
+  url    = https://api.anthropic.com/v1
+
+[cohere]
+  key    = TVaWYgmCcAtn4XaUkqlvmu9AVdvU2QSbWUGZ
+  url    = https://api.cohere.com/v1
+
+[huggingface]
+  key    = hf_W7HG8noEjNnz4P43ylVj9T5WfihQHp1RL
+  url    = https://api.huggingface.com/v1
+
+[volcano]
+  key    = 4a06b8ff-799d-409e-813b-28b5c1f9d84a
+  url    = https://api.volcano.com/v1
+
 ```
 
-## Configuration
+## Quick Reference
 
-Create `~/.ai-shell/config.yaml`:
+| Platform | Key | Endpoint |
+|----------|-----|----------|
+| anthropic | `sk-ant-api03-mes9fPnsisgXX13gkk8hBm60KoTxJ3VpfQ91O` | https://api.anthropic.com/v1 |
+| cohere | `TVaWYgmCcAtn4XaUkqlvmu9AVdvU2QSbWUGZ` | https://api.cohere.com/v1 |
+| huggingface | `hf_W7HG8noEjNnz4P43ylVj9T5WfihQHp1RL` | https://api.huggingface.com/v1 |
+| volcano | `4a06b8ff-799d-409e-813b-28b5c1f9d84a` | https://api.volcano.com/v1 |
 
-```yaml
-providers:
-  openrouter:
-    api_key: "sk-or-v1-RWlKwISKILzVPiFqIarzS50YAGANQ8bbdH0C7P8Xw"
-    base_url: "https://api.openrouter.com/v1"
-    default_model: "deepseek-chat"
-  kimi:
-    api_key: "sk-kimi-eFfWxCOjIboy2P4ujxbzeHNosDKql"
-    base_url: "https://api.kimi.com/v1"
-    default_model: "deepseek-chat"
-  xunfei:
-    api_key: "9a112182:9ee5f7e9d5f6897b:457d57128b3414d909860b857c291fe8"
-    base_url: "https://api.xunfei.com/v1"
-    default_model: "claude-3.5-sonnet"
-```
-
-## Usage
-
-```bash
-# Interactive chat
-ai-shell chat --provider openai
-
-# List available models
-ai-shell models --all
-```
-
-## Environment Variables
-
-As an alternative to config file, you can use environment variables:
-
-```bash
-export OPENROUTER_API_KEY=sk-or-v1-RWlKwISKILzVPiFqIarzS50YAGANQ8bbdH0C7P8Xw
-export KIMI_API_KEY=sk-kimi-eFfWxCOjIboy2P4ujxbzeHNosDKql
-export XUNFEI_API_KEY=9a112182:9ee5f7e9d5f6897b:457d57128b3414d909860b857c291fe8
-```
+---
+*Auto-generated at 2026-05-24 18:15*
