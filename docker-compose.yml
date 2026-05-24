@@ -1,0 +1,18 @@
+version: "3.8"
+
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - PERPLEXITY_API_KEY=pplx-iTzPIV0QAn0WYr104SKMJvpMTHJx6gzVvuQDiW3QIPITXh
+      - TOGETHER_API_KEY=sk-together-BhpTOUQlLH1dW5CoSTAxVacBlne8UavUx
+      - OPENROUTER_API_KEY=sk-or-v1-egxpo77a21RRp9AhyJwRETLMXnmMg7i7ZgOAhp4Xe
+      - NODE_ENV=production
+      - PORT=3000
+
+  redis:
+    image: "redis:7-alpine"
+    ports:
+      - "6379:6379"

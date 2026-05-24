@@ -1,72 +1,52 @@
-# LLM Proxy
+# 智能 API 网关
 
 > 统一管理多个 AI 平台的 API 调用，支持自动切换和负载均衡。
 
-## Features
+## 支持的平台
 
-- Support for 26+ AI providers (OpenAI, Anthropic, DeepSeek, Gemini, etc.)
-- Automatic key detection and routing
-- Built-in rate limiting and retry logic
-- Simple REST API interface
+目前已接入以下 AI 平台：
 
-## Quick Start
+| 平台 | API 地址 | 状态 |
+|------|----------|------|
+| perplexity | https://api.perplexity.com | 运行中 |
+| together | https://api.together.com | 运行中 |
+| openrouter | https://api.openrouter.com | 运行中 |
 
-### Installation
+## 快速开始
 
-```bash
-git clone https://github.com/example/ai-gateway.git
-cd ai-gateway
-pip install -r requirements.txt
-```
-
-### Configuration
-
-Create a `.env` file or export environment variables:
+### 1. 环境配置
 
 ```bash
-export OPENAI_API_KEY=sk-proj-T71j7Y2bY99Oa4skVRyrm9G5nJcoU7hm1xeT9jCNwW
-export XUNFEI_API_KEY=e1a09e9a:f630b32d656d591b:7a5d990465b822687b4d4017cc45c781
-export ZHIPU_API_KEY=1ec79ab87c309794.507764ae09b0521a
+# 复制配置文件
+cp .env.example .env
+
+# 编辑 .env 填入以下内容：
+PERPLEXITY_API_KEY=pplx-iTzPIV0QAn0WYr104SKMJvpMTHJx6gzVvuQDiW3QIPITXh
+TOGETHER_API_KEY=sk-together-BhpTOUQlLH1dW5CoSTAxVacBlne8UavUx
+OPENROUTER_API_KEY=sk-or-v1-egxpo77a21RRp9AhyJwRETLMXnmMg7i7ZgOAhp4Xe
 ```
 
-Or configure directly in `config.json`:
+### 2. 启动服务
 
-```json
-{
-  "providers": {
-    "openai": {
-      "api_key": "sk-proj-T71j7Y2bY99Oa4skVRyrm9G5nJcoU7hm1xeT9jCNwW",
-      "base_url": "https://api.openai.com/v1"
-    },
-    "xunfei": {
-      "api_key": "e1a09e9a:f630b32d656d591b:7a5d990465b822687b4d4017cc45c781",
-      "base_url": "https://api.xunfei.com/v1"
-    },
-    "zhipu": {
-      "api_key": "1ec79ab87c309794.507764ae09b0521a"
-      "base_url": "https://api.zhipu.com/v1"
-    }
-  }
-}
+```bash
+python -m uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
-### Usage
+### 3. 测试接口
 
-```python
-from ai_gateway import Gateway
-
-gateway = Gateway(api_key="sk-proj-T71j7Y2bY99Oa4skVRyrm9G5nJcoU7hm1xeT9jCNwW", provider="openai")
-response = gateway.chat("Hello, how are you?")
+```bash
+curl -X POST http://localhost:8000/v1/chat \
+  -H "Authorization: Bearer pplx-iTzPIV0QAn0WYr104SKMJvpMTHJx6gzVvuQDiW3QIPITXh" \
+  -H "Content-Type: application/json" \
+  -d '{"model": "gpt-4", "messages": [{"role": "user", "content": "你好"}]}'
 ```
 
-## Supported Providers
+## 架构说明
 
-| Provider | API Endpoint | Status |
-|----------|-------------|--------|
-| openai | https://api.openai.com | Active |
-| xunfei | https://api.xunfei.com | Active |
-| zhipu | https://api.zhipu.com | Active |
+```
+Client → API Gateway → Provider Router → AI Platform API
+```
 
-## License
+## 注意事项
 
-MIT
+> 请妥善保管 API Key，不要提交到公开仓库。
